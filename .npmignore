@@ -1,7 +1,4 @@
-node_modules/
-.env
-.DS_Store
-*.log
-.playwright-mcp/
 .mcpregistry_github_token
 .mcpregistry_registry_token
+mcp-publisher
+*.tgz
