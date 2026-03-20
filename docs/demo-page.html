@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskFlow — Project Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; color: #1e293b; }
+
+  /* Header */
+  header { background: white; color: #1e293b; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; }
+  header h1 { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  header h1 span { color: #6366f1; }
+  nav { display: flex; gap: 4px; }
+  nav a { color: #64748b; text-decoration: none; font-size: 13px; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all .15s; }
+  nav a:hover { color: #1e293b; background: #f1f5f9; }
+  nav a.active { color: #6366f1; background: #eef2ff; }
+  .user-area { display: flex; align-items: center; gap: 12px; }
+  .notif-btn { background: none; border: none; color: #64748b; cursor: pointer; font-size: 16px; position: relative; }
+  .notif-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background: #f43f5e; border-radius: 50%; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #4f46e5); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 600; }
+
+  /* Main layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px 24px; }
+
+  /* Top bar */
+  .top-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+  .search-input { flex: 1; padding: 9px 14px 9px 36px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") 12px center no-repeat; }
+  .btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; display: flex; align-items: center; gap: 6px; transition: all .15s; }
+  .btn-primary { background: #6366f1; color: white; }
+  .btn-primary:hover { background: #4f46e5; }
+  .btn-outline { background: white; color: #475569; border: 1px solid #e2e8f0; }
+  .btn-outline:hover { border-color: #6366f1; color: #6366f1; }
+
+  /* Stats row */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+  .stat-card { background: white; border-radius: 10px; padding: 16px 18px; border: 1px solid #e2e8f0; }
+  .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: .6px; font-weight: 500; }
+  .stat-row { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
+  .stat-value { font-size: 26px; font-weight: 700; }
+  .stat-change { font-size: 11px; font-weight: 500; }
+  .stat-change.up { color: #16a34a; }
+  .stat-change.down { color: #dc2626; }
+  .stat-bar { height: 4px; border-radius: 2px; background: #f1f5f9; margin-top: 10px; overflow: hidden; }
+  .stat-bar-fill { height: 100%; border-radius: 2px; }
+
+  /* Two-column layout */
+  .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+
+  /* Task list */
+  .panel { background: white; border-radius: 10px; border: 1px solid #e2e8f0; overflow: hidden; }
+  .panel-header { padding: 14px 18px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+  .panel-title { font-size: 14px; font-weight: 600; }
+  .panel-badge { background: #f1f5f9; color: #64748b; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .task-item { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f8fafc; cursor: pointer; transition: background .1s; }
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: #fafbfc; }
+  .task-check { width: 16px; height: 16px; border: 2px solid #cbd5e1; border-radius: 4px; flex-shrink: 0; }
+  .task-check.done { background: #6366f1; border-color: #6366f1; position: relative; }
+  .task-check.done::after { content: "✓"; color: white; font-size: 10px; position: absolute; top: -1px; left: 2px; }
+  .task-info { flex: 1; min-width: 0; }
+  .task-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .task-name.completed { color: #94a3b8; text-decoration: line-through; }
+  .task-meta { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+  .priority { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; letter-spacing: .3px; }
+  .priority.high { background: #fef2f2; color: #dc2626; }
+  .priority.medium { background: #fffbeb; color: #d97706; }
+  .priority.low { background: #f0fdf4; color: #16a34a; }
+
+  /* Activity feed */
+  .activity-item { padding: 12px 18px; border-bottom: 1px solid #f8fafc; display: flex; gap: 10px; }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .activity-dot.blue { background: #6366f1; }
+  .activity-dot.green { background: #16a34a; }
+  .activity-dot.amber { background: #d97706; }
+  .activity-text { font-size: 12px; color: #475569; line-height: 1.5; }
+  .activity-time { font-size: 11px; color: #94a3b8; }
+
+  /* Footer */
+  footer { text-align: center; padding: 28px; color: #94a3b8; font-size: 11px; }
+</style>
+</head>
+<body>
+  <header id="main-header">
+    <h1 id="app-title"><span>◆</span> TaskFlow</h1>
+    <nav id="main-nav" role="navigation">
+      <a class="active" id="nav-dashboard">Dashboard</a>
+      <a id="nav-projects">Projects</a>
+      <a id="nav-team">Team</a>
+      <a id="nav-calendar">Calendar</a>
+      <a id="nav-reports">Reports</a>
+    </nav>
+    <div class="user-area" id="user-menu">
+      <button class="notif-btn" id="notifications" aria-label="Notifications">
+        🔔<span class="notif-dot"></span>
+      </button>
+      <div class="avatar" id="user-avatar">N</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="top-bar" id="toolbar">
+      <input class="search-input" id="search-tasks" type="text" placeholder="Search tasks, projects, people..." />
+      <button class="btn btn-primary" id="btn-new-task">+ New Task</button>
+      <button class="btn btn-outline" id="btn-filter">Filter</button>
+      <button class="btn btn-outline" id="btn-sort">Sort</button>
+    </div>
+
+    <section class="stats" id="stats-section">
+      <div class="stat-card" id="stat-active">
+        <div class="stat-label">Active Tasks</div>
+        <div class="stat-row">
+          <div class="stat-value">38</div>
+          <div class="stat-change up">+5 this week</div>
+        </div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:72%;background:#6366f1"></div></div>
+      </div>
+      <div class="stat-card" id="stat-completed">
+        <div class="stat-label">Completed</div>
+        <div class="stat-row">
+          <div class="stat-value">89</div>
+          <div class="stat-change up">70% rate</div>
+        </div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:70%;background:#16a34a"></div></div>
+      </div>
+      <div class="stat-card" id="stat-overdue">
+        <div class="stat-label">Overdue</div>
+        <div class="stat-row">
+          <div class="stat-value">5</div>
+          <div class="stat-change down">+2 today</div>
+        </div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:12%;background:#dc2626"></div></div>
+      </div>
+      <div class="stat-card" id="stat-team">
+        <div class="stat-label">Team Load</div>
+        <div class="stat-row">
+          <div class="stat-value">83%</div>
+          <div class="stat-change up">balanced</div>
+        </div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:83%;background:#d97706"></div></div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <div class="panel" id="task-panel">
+        <div class="panel-header">
+          <span class="panel-title" id="task-list-title">Recent Tasks</span>
+          <span class="panel-badge">12 open</span>
+        </div>
+        <div id="task-list" role="list">
+          <div class="task-item" id="task-1" role="listitem">
+            <div class="task-check"></div>
+            <div class="task-info">
+              <div class="task-name">Update API documentation for v3 endpoints</div>
+              <div class="task-meta">Due Mar 20 · Backend · Alex</div>
+            </div>
+            <span class="priority high">HIGH</span>
+          </div>
+          <div class="task-item" id="task-2" role="listitem">
+            <div class="task-check"></div>
+            <div class="task-info">
+              <div class="task-name">Fix authentication redirect loop on mobile</div>
+              <div class="task-meta">Due Mar 21 · Auth · Sam</div>
+            </div>
+            <span class="priority high">HIGH</span>
+          </div>
+          <div class="task-item" id="task-3" role="listitem">
+            <div class="task-check done"></div>
+            <div class="task-info">
+              <div class="task-name completed">Redesign onboarding flow wireframes</div>
+              <div class="task-meta">Completed Mar 18 · Design · Kim</div>
+            </div>
+            <span class="priority medium">MED</span>
+          </div>
+          <div class="task-item" id="task-4" role="listitem">
+            <div class="task-check"></div>
+            <div class="task-info">
+              <div class="task-name">Implement dark mode toggle component</div>
+              <div class="task-meta">Due Mar 25 · Frontend · Nicole</div>
+            </div>
+            <span class="priority medium">MED</span>
+          </div>
+          <div class="task-item" id="task-5" role="listitem">
+            <div class="task-check done"></div>
+            <div class="task-info">
+              <div class="task-name completed">Write E2E tests for checkout flow</div>
+              <div class="task-meta">Completed Mar 17 · QA · Jordan</div>
+            </div>
+            <span class="priority low">LOW</span>
+          </div>
+          <div class="task-item" id="task-6" role="listitem">
+            <div class="task-check"></div>
+            <div class="task-info">
+              <div class="task-name">Set up monitoring alerts for production</div>
+              <div class="task-meta">Due Mar 28 · DevOps · Alex</div>
+            </div>
+            <span class="priority low">LOW</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="activity-panel">
+        <div class="panel-header">
+          <span class="panel-title" id="activity-title">Activity</span>
+          <span class="panel-badge">Today</span>
+        </div>
+        <div id="activity-feed" role="feed">
+          <div class="activity-item" id="activity-1">
+            <div class="activity-dot green"></div>
+            <div>
+              <div class="activity-text"><strong>Kim</strong> completed "Onboarding wireframes"</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item" id="activity-2">
+            <div class="activity-dot blue"></div>
+            <div>
+              <div class="activity-text"><strong>Alex</strong> commented on "API docs"</div>
+              <div class="activity-time">3 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item" id="activity-3">
+            <div class="activity-dot amber"></div>
+            <div>
+              <div class="activity-text"><strong>Sam</strong> flagged auth bug as blocking</div>
+              <div class="activity-time">5 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item" id="activity-4">
+            <div class="activity-dot blue"></div>
+            <div>
+              <div class="activity-text"><strong>Nicole</strong> created "Dark mode toggle"</div>
+              <div class="activity-time">Yesterday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="app-footer">TaskFlow v2.1 · 6 team members · Last sync 2 min ago</footer>
+</body>
+</html>
