@@ -1,6 +1,6 @@
 {
   "name": "@mcpware/ui-annotator",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "MCP server that annotates any web page with hover labels — zero extensions, any browser",
   "type": "module",
   "bin": {
@@ -11,10 +11,23 @@
     "dev": "node --watch src/index.js"
   },
   "keywords": [
-    "mcp", "mcp-server", "ui-annotator", "ui-inspector", "element-inspector",
-    "dom-inspector", "hover-labels", "ui-labels", "design-feedback",
-    "web-inspector", "hover-annotation", "accessibility", "reverse-proxy",
-    "browser", "frontend", "claude", "model-context-protocol"
+    "mcp",
+    "mcp-server",
+    "ui-annotator",
+    "ui-inspector",
+    "element-inspector",
+    "dom-inspector",
+    "hover-labels",
+    "ui-labels",
+    "design-feedback",
+    "web-inspector",
+    "hover-annotation",
+    "accessibility",
+    "reverse-proxy",
+    "browser",
+    "frontend",
+    "claude",
+    "model-context-protocol"
   ],
   "mcpName": "io.github.mcpware/ui-annotator-mcp",
   "author": "mcpware",
