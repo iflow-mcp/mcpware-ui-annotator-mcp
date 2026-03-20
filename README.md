@@ -5,6 +5,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/mcpware/ui-annotator-mcp?style=social)](https://github.com/mcpware/ui-annotator-mcp)
 [![GitHub forks](https://img.shields.io/github/forks/mcpware/ui-annotator-mcp?style=social)](https://github.com/mcpware/ui-annotator-mcp/fork)
 
+**English** | [廣東話](README.zh-HK.md)
+
 **See what every UI element is called — in any browser, zero extensions.**
 
 An MCP server that adds interactive hover annotations to any web page. Open a proxied URL, hover any element, see its name. Tell your AI assistant "make the `sidebar` wider" — it knows exactly what you mean.
