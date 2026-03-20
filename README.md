@@ -172,6 +172,14 @@ npx @mcpware/ui-annotator
 |---|---|---|
 | `UI_ANNOTATOR_PORT` | `7077` | Port for the proxy server |
 
+## More from @mcpware
+
+| Project | What it does | Install |
+|---------|---|---|
+| **[Pagecast](https://github.com/mcpware/pagecast)** | Record any browser page as GIF or video via MCP | `npx @mcpware/pagecast` |
+| **[Claude Code Organizer](https://github.com/mcpware/claude-code-organizer)** | Visual dashboard for memories, skills, MCP servers, hooks | `npx @mcpware/claude-code-organizer` |
+| **[Instagram MCP](https://github.com/mcpware/instagram-mcp)** | 23 tools for the Instagram Graph API | `npx @mcpware/instagram-mcp` |
+
 ## License
 
 MIT
