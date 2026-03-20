@@ -11,11 +11,10 @@
     "dev": "node --watch src/index.js"
   },
   "keywords": [
-    "mcp",
-    "ui",
-    "annotator",
-    "design",
-    "feedback"
+    "mcp", "mcp-server", "ui-annotator", "ui-inspector", "element-inspector",
+    "dom-inspector", "hover-labels", "ui-labels", "design-feedback",
+    "web-inspector", "hover-annotation", "accessibility", "reverse-proxy",
+    "browser", "frontend", "claude", "model-context-protocol"
   ],
   "mcpName": "io.github.mcpware/ui-annotator-mcp",
   "author": "mcpware",
