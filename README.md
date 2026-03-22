@@ -178,10 +178,10 @@ npx @mcpware/ui-annotator
 
 | Project | What it does | Install |
 |---------|---|---|
-| **[Pagecast](https://github.com/mcpware/pagecast)** | Record any browser page as GIF or video via MCP | `npx @mcpware/pagecast` |
-| **[Claude Code Organizer](https://github.com/mcpware/claude-code-organizer)** | Visual dashboard for memories, skills, MCP servers, hooks | `npx @mcpware/claude-code-organizer` |
-| **[Instagram MCP](https://github.com/mcpware/instagram-mcp)** | 23 tools for the Instagram Graph API | `npx @mcpware/instagram-mcp` |
-
+| **[Instagram MCP](https://github.com/mcpware/instagram-mcp)** | 23 Instagram Graph API tools — posts, comments, DMs, stories, analytics | `npx @mcpware/instagram-mcp` |
+| **[Claude Code Organizer](https://github.com/mcpware/claude-code-organizer)** | Visual dashboard for Claude Code memories, skills, MCP servers, hooks | `npx @mcpware/claude-code-organizer` |
+| **[Pagecast](https://github.com/mcpware/pagecast)** | Record browser sessions as GIF or video via MCP | `npx @mcpware/pagecast` |
+| **[LogoLoom](https://github.com/mcpware/logoloom)** | AI logo design → SVG → full brand kit export | `npx @mcpware/logoloom` |
 ## License
 
 MIT
