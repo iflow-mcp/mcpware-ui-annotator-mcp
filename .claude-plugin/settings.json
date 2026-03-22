@@ -1,11 +1,8 @@
 {
-  "permissions": {
-    "allow": [
-      "mcp__ui-annotator__annotate",
-      "mcp__ui-annotator__get_elements",
-      "mcp__ui-annotator__highlight_element",
-      "mcp__ui-annotator__rescan_elements",
-      "mcp__ui-annotator__inspect_mode"
-    ]
+  "mcpServers": {
+    "ui-annotator": {
+      "command": "npx",
+      "args": ["-y", "@mcpware/ui-annotator"]
+    }
   }
 }

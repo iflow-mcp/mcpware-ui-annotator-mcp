@@ -1,0 +1,7 @@
+{
+  "name": "UI Annotator",
+  "version": "0.1.6",
+  "description": "MCP server that annotates any web page with hover labels for AI assistants.",
+  "author": "mcpware",
+  "homepage": "https://github.com/mcpware/ui-annotator-mcp"
+}
