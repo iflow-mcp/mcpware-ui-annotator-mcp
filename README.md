@@ -7,9 +7,9 @@
 
 **English** | [廣東話](README.zh-HK.md)
 
-**See what every UI element is called — in any browser, zero extensions.**
+**Bridge the gap between what you see and what AI can reference — in any browser, zero extensions.**
 
-An MCP server that adds interactive hover annotations to any web page. Open a proxied URL, hover any element, see its name. Tell your AI assistant "make the `sidebar` wider" — it knows exactly what you mean.
+The only tool that puts visible labels on every web element. Hover any element, see its name. Tell your AI assistant "make the `sidebar` wider" — it knows exactly which element you mean. No screenshots, no CSS selectors, no miscommunication.
 
 ![Demo](docs/demo.gif)
 
@@ -101,15 +101,17 @@ The toolbar sits at the top center of the page showing:
 
 ## Why Not Use Existing Tools?
 
+None of these do what UI Annotator does — **live visual labels on every element via reverse proxy**:
+
 | Tool | Approach | Why we're different |
 |---|---|---|
-| **MCP Pointer** | Chrome extension + MCP server | Requires Chrome extension. Click-to-inspect, no hover overlay. |
-| **Agentation** | npm package embedded in your app | Requires code changes. React 18+ dependency. Not zero-config. |
-| **Cursor Visual Editor** | Built-in IDE browser | Only works inside Cursor IDE. |
-| **Windsurf Previews** | Built-in IDE browser | Only works inside Windsurf IDE. |
-| **Chrome DevTools MCP** | Programmatic DOM access for AI | AI can inspect, but humans don't see visual annotations. |
-| **VisBug** | Chrome extension for visual editing | No MCP integration. No AI connection. Chrome only. |
-| **Marker.io / BugHerd** | SaaS visual feedback widgets | Not MCP. Paid. For bug reporting, not AI-assisted development. |
+| **browser-use** (82K⭐) | AI automation framework | Automates browsers, doesn't label elements for humans. Different use case entirely. |
+| **Chrome DevTools MCP** (31K⭐) | DOM snapshot + element UIDs | AI can inspect, but humans don't see visual annotations. No shared vocabulary. |
+| **Playwright MCP** (29K⭐) | Accessibility tree snapshot | Returns structured text, no visual overlay. Truncates important context. |
+| **OmniParser** | Screenshot + CV detection | Screenshot-based, not live DOM. ~40% accuracy on hard benchmarks. |
+| **MCP Pointer** (526 users) | Chrome extension + MCP | Requires Chrome extension. Human clicks to select — no hover overlay. |
+| **Agentation** | npm embedded in your app | Requires code changes. React 18+ dependency. Not zero-config. |
+| **Vibe Annotations** | Chrome extension | Extension-based, developer-only annotation workflow. |
 
 ### Feature Comparison
 
