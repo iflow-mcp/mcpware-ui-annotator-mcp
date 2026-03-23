@@ -1,6 +1,7 @@
 # UI Annotator MCP
 
 [![npm version](https://img.shields.io/npm/v/@mcpware/ui-annotator)](https://www.npmjs.com/package/@mcpware/ui-annotator)
+[![npm downloads](https://img.shields.io/npm/dt/@mcpware/ui-annotator?label=downloads)](https://www.npmjs.com/package/@mcpware/ui-annotator)
 [![license](https://img.shields.io/github/license/mcpware/ui-annotator-mcp)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/mcpware/ui-annotator-mcp?style=social)](https://github.com/mcpware/ui-annotator-mcp)
 [![GitHub forks](https://img.shields.io/github/forks/mcpware/ui-annotator-mcp?style=social)](https://github.com/mcpware/ui-annotator-mcp/fork)
