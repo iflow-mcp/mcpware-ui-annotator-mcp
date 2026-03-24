@@ -1,0 +1,61 @@
+# UI Annotator MCP
+
+> Reverse-proxy MCP server that injects hover annotations onto any web page so humans and AI share the same element names — zero extensions, any browser.
+
+## Docs
+
+- [README](https://github.com/mcpware/ui-annotator-mcp/blob/main/README.md)
+- [npm](https://www.npmjs.com/package/@mcpware/ui-annotator)
+
+## Quick Start
+
+```bash
+npx @mcpware/ui-annotator
+# Proxy starts on http://localhost:7077
+# Open http://localhost:7077/localhost:YOUR_PORT in any browser
+```
+
+## What It Does
+
+- Reverse-proxies your local web app and injects annotation scripts into HTML responses
+- Hover any element to see its name, CSS selector, content preview, and dimensions
+- Inspect mode: click any element to copy its name to clipboard
+- Reports all detected UI elements to AI via MCP tools
+- Auto-rescans DOM on changes via MutationObserver
+- Works in any browser (Chrome, Firefox, Safari, Edge) with zero extensions and zero code changes
+- Strips CSP headers to allow injected script
+
+## MCP Tools
+
+| Tool | Description |
+|---|---|
+| `annotate(url)` | Returns proxy URL for user to open in any browser |
+| `get_elements()` | Returns all detected UI elements with names, selectors, positions |
+| `highlight_element(name)` | Flash-highlights a specific element for visual confirmation |
+| `rescan_elements()` | Force DOM rescan after page changes |
+| `inspect_mode(enabled)` | Toggle inspect mode remotely |
+
+## MCP Server Config
+
+### Claude Code
+```bash
+claude mcp add ui-annotator -- npx @mcpware/ui-annotator
+```
+
+### claude_desktop_config.json
+```json
+{
+  "mcpServers": {
+    "ui-annotator": {
+      "command": "npx",
+      "args": ["@mcpware/ui-annotator"]
+    }
+  }
+}
+```
+
+## Environment Variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `UI_ANNOTATOR_PORT` | `7077` | Port for the proxy server |
