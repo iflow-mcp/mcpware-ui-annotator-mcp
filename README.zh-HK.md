@@ -13,6 +13,10 @@
 
 ![Demo](docs/demo.gif)
 
+## 點解要用
+
+大幅提升 AI 驅動嘅 UI 設計流程。痛點：同 AI 講「將嗰個 button 搬去 search bar 隔離」從來都唔 work，因為 AI 睇唔到你個頁面。UI Annotator 解決呢個問題 — hover 任何 element 就會顯示佢嘅 component 名。而家你講「將 `SearchButton` 搬去 `NavBar` 下面」，Claude 即刻改啱嘅 component。唔使 browser extension，任何 framework 都 work。成個 workflow 變成：開頁面 → hover 搵到 element 名 → 用真實 component 名描述改動 → Claude 改 → refresh 再嚟。將一個令人沮喪嘅來回過程變成流暢嘅設計循環。
+
 ## 問題
 
 同 AI coding 助手改 UI 嘅時候，最難嗰part唔係改 code — 而係**形容你想改邊個 element**。

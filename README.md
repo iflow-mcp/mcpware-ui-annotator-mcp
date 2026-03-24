@@ -14,6 +14,10 @@ The only tool that puts visible labels on every web element. Hover any element, 
 
 ![Demo](docs/demo.gif)
 
+## Why It Matters
+
+Dramatically improves AI-driven UI design and iteration. The pain: telling AI "move that button next to the search bar" never works because the AI can't see your page. UI Annotator fixes this — hover over any element and its component name appears as a label. Now you say "move `SearchButton` below `NavBar`" and Claude edits the right component instantly. No browser extensions, works with any framework. The workflow becomes: open page → hover to identify elements → describe changes using real component names → Claude edits → refresh and repeat. Turns a frustrating back-and-forth into a fluid design loop.
+
 ## The Problem
 
 When reviewing a web UI with an AI coding assistant, the hardest part isn't the code change — it's **describing which element you want changed**.
